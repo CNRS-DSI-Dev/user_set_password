@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<info>
+    <id>user_set_password</id>
+    <name>User Set Password</name>
+    <description>Based on firstrunwizard, this app display the new user a screen asking him to set his password.</description>
+    <version>0.1</version>
+    <licence>AGPLv3</licence>
+    <author>Patrick Paysant / CNRS</author>
+    <require>7</require>
+</info>
