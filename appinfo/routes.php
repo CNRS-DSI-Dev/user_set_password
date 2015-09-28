@@ -32,5 +32,10 @@ $application->registerRoutes($this, array(
             'url' => '/api/1.0/disable',
             'verb' => 'GET',
         ),
+        array(
+            'name' => 'request#changepassword',
+            'url' => '/api/1.0/changepassword',
+            'verb' => 'POST',
+        ),
     ),
 ));

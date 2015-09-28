@@ -18,6 +18,7 @@ function showSetPassword() {
 			if (!SVGSupport()) {
 				replaceSVG();
 			}
+			showSetPasswordComplete();
 		},
 		onClosed : function() {
 			$.ajax({

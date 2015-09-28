@@ -28,7 +28,33 @@ class RequestController extends APIController
     }
 
     /**
-     * Create a request
+     * Change the user password
+     * @NoAdminRequired
+     */
+    public function changePassword()
+    {
+        \OC_JSON::callCheck();
+        \OC_JSON::checkLoggedIn();
+
+        $username = \OC_User::getUser();
+        $password = isset($_POST['personal-password']) ? $_POST['personal-password'] : null;
+
+        if (!is_null($password) && \OC_User::setPassword($username, $password)) {
+            return array(
+                'status' => 'success',
+                'data' => array(
+                    'msg' => $this->l->t('Password successfully created'),
+                ),
+            );
+        } else {
+            return array(
+                'status' => 'error',
+            );
+        }
+    }
+
+    /**
+     * Enable the display
      * @NoAdminRequired
      * @param string $file File path
      * @param int $version Allowed values are stored in appconfig "versions"

@@ -8,15 +8,9 @@
     <form id="passwordform" class="section">
         <h2><?php p($l->t('Local My CoRe password'));?></h2>
         <div>
-            Bon, là t'es connecté avec Janus, mais pour le client lourd, va falloir un mot de passe "local".
-            Viens saisir le mot de passe de ton choix dans la bonne humeur !
+            <?php p($l->t("You're presently connected via \"Janus\", if you want to use sync soft or mobile app, please set a password (this password will be exclusively used with My CoRe)."));?>
         </div>
-        <div id="passwordchanged"><?php echo $l->t('Your password was changed');?></div>
-        <div id="passworderror" class="msg error" style="max-width:40em;text-align:center;"><?php echo $l->t('Unable to change your password');?></div>
-        <input type="password" id="pass1" name="oldpassword"
-            placeholder="<?php echo $l->t('Current password');?>"
-            autocomplete="off" autocapitalize="off" autocorrect="off" />
-        <input type="password" id="pass2" name="personal-password"
+        <input type="password" id="pass1" name="personal-password"
             placeholder="<?php echo $l->t('New password');?>"
             data-typetoggle="#personal-show"
             autocomplete="off" autocapitalize="off" autocorrect="off" />
@@ -25,6 +19,8 @@
         <br/>
 
         <div class="strengthify-wrapper"></div>
+        <div id="passwordchanged"><?php echo $l->t('Your password was changed');?></div>
+        <div id="passworderror" class="msg error" style="max-width:40em;text-align:center;line-height: "><?php echo $l->t('Unable to change your password');?></div>
     </form>
 
     <form id="password_policy" class="section">
@@ -47,7 +43,7 @@
     </form>
 
     <div class="section">
-        <p class="closeSetPassword">Ça m'intéresse pas, tout ça, on passe à la suite.
+        <button class="closeSetPassword"><?php p($l->t('Skip this step, I will set this local My CoRe password later.')); ?></button>
     </div>
 
 </div>
