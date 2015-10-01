@@ -33,17 +33,35 @@ class RequestController extends APIController
      */
     public function changePassword()
     {
-        \OC_JSON::callCheck();
-        \OC_JSON::checkLoggedIn();
+        // \OC_JSON::callCheck();
+        // \OC_JSON::checkLoggedIn();
 
-        $username = \OC_User::getUser();
-        $password = isset($_POST['personal-password']) ? $_POST['personal-password'] : null;
+        $username = \OC::$server->getUserSession()->getUser()->getUID();
+        $password = !empty($_POST['personal-password']) ? $_POST['personal-password'] : null;
+        $password2 = !empty($_POST['personal-password-confirm']) ? $_POST['personal-password-confirm'] : null;
+
+        if (is_null($password) or is_null($password2)) {
+            return array(
+                'status' => 'error',
+                'data' => array(
+                    'msg' => (string)$this->l->t('Both password fields must be set.'),
+                ),
+            );
+        }
+        elseif ($password !== $password2) {
+            return array(
+                'status' => 'error',
+                'data' => array(
+                    'msg' => (string)$this->l->t('Passwords differs.'),
+                ),
+            );
+        }
 
         if (!is_null($password) && \OC_User::setPassword($username, $password)) {
             return array(
                 'status' => 'success',
                 'data' => array(
-                    'msg' => $this->l->t('Password successfully created'),
+                    'msg' => (string)$this->l->t('Password successfully created'),
                 ),
             );
         } else {

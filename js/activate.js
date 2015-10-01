@@ -10,6 +10,8 @@ $(document).ready(function () {
 function showSetPasswordComplete() {
     $("#userSetPassword #passwordform").on('submit', function(){
 
+        // TODO: implement basic tests (fields must be set, fields must be same)
+
         if ($('#pass1').val() !== '') {
             // Serialize the data
             var post = $( "#passwordform" ).serialize();
@@ -25,7 +27,7 @@ function showSetPasswordComplete() {
                 }
                 else {
                     if (typeof(data.data) !== "undefined") {
-                        $('#passworderror').html(data.data.message);
+                        $('#passworderror').html(data.data.msg);
                     } else {
                         $('#passworderror').html(t('user_set_password', 'Unable to change password'));
                     }
@@ -56,6 +58,7 @@ function showSetPasswordComplete() {
         input.showPassword().keyup();
     };
     setShowPassword($('#pass1'), $('label[for=personal-show]'));
+    setShowPassword($('#pass2'), $('label[for=personal-confirm-show]'));
 
     $("#userSetPassword #passwordbutton").bindFirst('click',function(e){
         check_password_policy(e);

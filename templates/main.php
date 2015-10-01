@@ -11,10 +11,15 @@
             <?php p($l->t("You're presently connected via \"Janus\", if you want to use sync soft or mobile app, please set a password (this password will be exclusively used with My CoRe)."));?>
         </div>
         <input type="password" id="pass1" name="personal-password"
-            placeholder="<?php echo $l->t('New password');?>"
+            placeholder="<?php p($l->t('New password'));?>"
             data-typetoggle="#personal-show"
             autocomplete="off" autocapitalize="off" autocorrect="off" />
         <input type="checkbox" id="personal-show" name="show" /><label for="personal-show"></label>
+        <input type="password" id="pass2" name="personal-password-confirm"
+            placeholder="<?php p($l->t('Confirm password'));?>"
+            data-typetoggle="#personal-confirm-show"
+            autocomplete="off" autocapitalize="off" autocorrect="off" />
+        <input type="checkbox" id="personal-confirm-show" name="show" /><label for="personal-confirm-show"></label>
         <input id="passwordbutton" type="submit" value="<?php echo $l->t('Change password');?>" />
         <br/>
 

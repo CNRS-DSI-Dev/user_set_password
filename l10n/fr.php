@@ -3,6 +3,7 @@ $TRANSLATIONS = array(
 'Local My CoRe password' => "Mot de passe My CoRe local",
 "Local My CoRe password Policy Enforcement" => "Stratégie de choix du mot de passe local My CoRe",
 "New password" => "Nouveau mot de passe",
+"Confirm password" => "Confirmer le mot de passe",
 "Change password" => "Changer le mot de passe",
 "You're presently connected via \"Janus\", if you want to use sync soft or mobile app, please set a password (this password will be exclusively used with My CoRe)." => "Vous êtes actuellement connecté via \"Janus\", Si vous souhaitez utiliser le logiciel de synchronisation ou une application mobile, merci d'initialiser un mot de passe (ce mot de passe est destiné uniquement au service My CoRe.",
 "Skip this step, I will set this local My CoRe password later." => "Je souhaite passer cette étape, je pourrai initialiser un mot de passe local à My CoRe plus tard.",
