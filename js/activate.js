@@ -11,6 +11,17 @@ function showSetPasswordComplete() {
     $("#userSetPassword #passwordform").on('submit', function(){
 
         // TODO: implement basic tests (fields must be set, fields must be same)
+        if (($('#pass1').val() == '') || ($('#pass2').val() == '')) {
+            $('#passworderror').html("Faut remplir les 2 champs !");
+            $('#passworderror').show();
+            return false;
+        }
+
+        if ($('#pass1').val() != $('#pass2').val()) {
+            $('#passworderror').html("Les 2 champs sont pas pareils !");
+            $('#passworderror').show();
+            return false;
+        }
 
         if ($('#pass1').val() !== '') {
             // Serialize the data
