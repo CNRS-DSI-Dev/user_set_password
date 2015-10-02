@@ -12,13 +12,13 @@ function showSetPasswordComplete() {
 
         // TODO: implement basic tests (fields must be set, fields must be same)
         if (($('#pass1').val() == '') || ($('#pass2').val() == '')) {
-            $('#passworderror').html("Faut remplir les 2 champs !");
+            $('#passworderror').html(t('user_set_password', 'Both password fields must be set.'));
             $('#passworderror').show();
             return false;
         }
 
         if ($('#pass1').val() != $('#pass2').val()) {
-            $('#passworderror').html("Les 2 champs sont pas pareils !");
+            $('#passworderror').html(t('user_set_password', 'Passwords differs.'));
             $('#passworderror').show();
             return false;
         }
