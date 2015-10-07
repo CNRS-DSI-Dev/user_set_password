@@ -8,7 +8,7 @@
     <form id="passwordform" class="section">
         <h2><?php p($l->t('Local My CoRe password'));?></h2>
         <div>
-            <?php p($l->t("You're presently connected via \"Janus\", if you want to use sync soft or mobile app, please set a password (this password will be exclusively used with My CoRe)."));?>
+            <?php p($l->t("You're presently connected through \"Janus\", if you want to use synchronization software or mobile app, please set a password (this password will be exclusively used with My CoRe)."));?>
         </div>
         <input type="password" id="pass1" name="personal-password"
             placeholder="<?php p($l->t('New password'));?>"
@@ -29,10 +29,10 @@
     </form>
 
     <form id="password_policy" class="section">
-        <h2><a name="ppe"></a><?php p($l->t('Local My CoRe password Policy Enforcement')); ?></h2>
+        <h2><a name="ppe"></a><?php p($l->t('Local My CoRe password policy enforcement')); ?></h2>
         <p><?php p($l->t('The following password restrictions are currently in place:')); ?></p>
-        <p><?php p($l->t('All passwords are required to be at least %d characters in length and;', $_['minlength'])); ?></p>
         <ul style="list-style: circle; margin-left: 20px;">
+            <li><?php p($l->t('All passwords are required to be at least %d characters in length and;', $_['minlength'])); ?></li>
             <?php if($_['mixedCase']) { ?>
             <li> <?php p($l->t('Must contain UPPER and lower case characters')); ?></li>
             <?php } ?>
