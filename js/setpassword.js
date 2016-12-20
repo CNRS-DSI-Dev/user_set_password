@@ -15,8 +15,11 @@ function showSetPassword() {
 		height:"70%",
 		href: OC.generateUrl('apps/user_set_password/'),
 		onComplete : function() {
-			if (!SVGSupport()) {
-				replaceSVG();
+			// if (!SVGSupport()) {
+			// 	replaceSVG();
+			// }
+			if (!OC.Util.hasSVGSupport()) {
+				OC.Util.replaceSVG();
 			}
 			showSetPasswordComplete();
 		},

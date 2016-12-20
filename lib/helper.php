@@ -34,7 +34,7 @@ class Helper
      */
     public static function isEnabled()
     {
-        $conf=\OCP\CONFIG::getUserValue(\OCP\User::getUser(), 'user_set_password', 'show', 1);
+        $conf=\OCP\Config::getUserValue(\OCP\User::getUser(), 'user_set_password', 'show', 1);
 
         return ($conf==1);
     }

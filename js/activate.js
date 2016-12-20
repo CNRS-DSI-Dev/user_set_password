@@ -8,7 +8,7 @@ $(document).ready(function () {
 
 // Done when "colorBox" is displayed
 function showSetPasswordComplete() {
-    $("#userSetPassword #passwordform").on('submit', function(){
+    $("#userSetPassword #passwordform").on('submit', function(e){
 
         // TODO: implement basic tests (fields must be set, fields must be same)
         if (($('#pass1').val() == '') || ($('#pass2').val() == '')) {
@@ -24,38 +24,61 @@ function showSetPasswordComplete() {
         }
 
         if ($('#pass1').val() !== '') {
-            // Serialize the data
-            var post = $( "#passwordform" ).serialize();
-            $('#passwordchanged').hide();
-            $('#passworderror').hide();
-            // Ajax foo
-            $.post(OC.generateUrl('/apps/user_set_password/api/1.0/changepassword'), post, function(data){
-                if ( data.status === "success" ){
-                    $('.strengthify-wrapper').tipsy('hide');
-                    OC.Notification.show( t('user_set_password', 'Password successfully changed') );
-                    setTimeout(OC.Notification.hide, 7000);
-                    $.colorbox.close();
+            var password = $('#pass1').val();
+            $.ajax({
+                type: 'POST',
+                url: OC.generateUrl('/apps/password_policy/policy/set_password'),
+                data: {password: password},
+                async: false
+            }).
+            done(function(data) {
+                if (data.status == 'success') {
+                    var post = $( "#passwordform" ).serialize();
+                    $('#passwordchanged').hide();
+                    $('#passworderror').hide();
+                    // Ajax foo
+                    $.post(OC.generateUrl('/apps/user_set_password/api/1.0/changepassword'), post, function(data){
+                        if ( data.status === "success" ){
+                            $('.strengthify-wrapper').tipsy('hide');
+                            OC.Notification.showTemporary( t('user_set_password', 'Password successfully changed') );
+                            e.stopImmediatePropagation();
+                            e.stopPropagation();
+                            e.preventDefault();
+                            $.colorbox.close();
+                        }
+                        else {
+                            if (typeof(data.data) !== "undefined") {
+                                $('#passworderror').html(data.data.msg);
+                            } else {
+                                $('#passworderror').html(t('user_set_password', 'Unable to change password'));
+                            }
+                            $('#passworderror').show();
+                        }
+                    });
+                    return false;
                 }
                 else {
-                    if (typeof(data.data) !== "undefined") {
-                        $('#passworderror').html(data.data.msg);
-                    } else {
-                        $('#passworderror').html(t('user_set_password', 'Unable to change password'));
-                    }
+                    $('#passworderror').html(t('password_policy', 'Password does not comply with the Password Policy.'));
                     $('#passworderror').show();
+
+                    e.stopImmediatePropagation();
+                    e.stopPropagation();
+                    e.preventDefault();
+                    return false;
                 }
             });
-            return false;
         }
         else {
             $('#passwordchanged').hide();
             $('#passworderror').show();
             return false;
         }
+
+        return false;
     });
 
     $('#pass1').strengthify({
-        zxcvbn: OC.linkTo('3rdparty','zxcvbn/js/zxcvbn.js'),
+        zxcvbn: OC.linkTo('core','vendor/zxcvbn/dist/zxcvbn.js'),
         titles: [
             t('core', 'Very weak password'),
             t('core', 'Weak password'),
@@ -70,10 +93,6 @@ function showSetPasswordComplete() {
     };
     setShowPassword($('#pass1'), $('label[for=personal-show]'));
     setShowPassword($('#pass2'), $('label[for=personal-confirm-show]'));
-
-    $("#userSetPassword #passwordbutton").bindFirst('click',function(e){
-        check_password_policy(e);
-    });
 }
 
 function check_password_policy(e) {
@@ -81,7 +100,7 @@ function check_password_policy(e) {
 
     $.ajax({
         type: 'POST',
-        url: OC.filePath('password_policy', 'ajax', 'testPassword.php'),
+        url: OC.generateUrl('/apps/password_policy/policy/set_password'),
         data: {password: password},
         success: function(data){
             if (data.status == 'success') {
@@ -100,13 +119,3 @@ function check_password_policy(e) {
     });
 
 }
-
-$.fn.bindFirst = function(name, fn) {
-    this.on(name, fn);
-
-    this.each(function() {
-        var handlers = $._data(this, 'events')[name.split('.')[0]];
-        var handler = handlers.pop();
-        handlers.splice(0, 0, handler);
-    });
-};

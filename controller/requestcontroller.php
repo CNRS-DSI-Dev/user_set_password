@@ -10,14 +10,14 @@
 
 namespace OCA\User_Set_Password\Controller;
 
-use \OCP\AppFramework\APIController;
+use \OCP\AppFramework\ApiController;
 use \OCP\AppFramework\Http\JSONResponse;
 use \OCP\IRequest;
 use \OCP\IL10N;
 
 use \OCA\User_Set_Password\lib\Helper;
 
-class RequestController extends APIController
+class RequestController extends ApiController
 {
     protected $l;
 

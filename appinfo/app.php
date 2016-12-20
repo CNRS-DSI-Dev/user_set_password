@@ -21,15 +21,16 @@ $c = $app->getContainer();
  */
 \OCP\Util::addStyle($c->query('AppName'), 'colorbox');
 \OCP\Util::addScript($c->query('AppName'), 'jquery.colorbox');
+\OCP\Util::addScript("core", 'jquery-showpassword');
 \OCP\Util::addscript($c->query('AppName'), 'setpassword');
 
 \OCP\Util::addStyle($c->query('AppName'), 'setpassword');
 
 if (\OCP\User::isLoggedIn() and Helper::isEnabled()) {
-    \OC_Util::addScript( '3rdparty', 'strengthify/jquery.strengthify' );
-    \OC_Util::addStyle( '3rdparty', 'strengthify/strengthify' );
-    \OC_Util::addScript( '3rdparty', 'chosen/chosen.jquery.min' );
-    \OC_Util::addStyle( '3rdparty', 'chosen/chosen' );
+    \OC_Util::addVendorScript('strengthify/jquery.strengthify');
+    \OC_Util::addVendorStyle('strengthify/strengthify');
+    // \OC_Util::addScript( '3rdparty', 'chosen/chosen.jquery.min' );
+    // \OC_Util::addStyle( '3rdparty', 'chosen/chosen' );
 
     \OCP\Util::addScript($c->query('AppName'), 'activate');
 }
